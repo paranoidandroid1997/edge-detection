@@ -1,1 +1,1 @@
-# edge-detection
+# Edge Detection 
