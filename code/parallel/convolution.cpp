@@ -39,7 +39,7 @@ void convolve(const float* A, const int AWidth, const int AHeight,
     std::cout << "The Grid Dimension is " << dimGrid.x << " X " << dimGrid.y << std::endl; 
 
     hipEvent_t start, stop; 
-    float elapsed_secs; 
+    float elapsed_msecs; 
     hipEventCreate(&start); 
     hipEventCreate(&stop); 
     hipEventRecord(start, 0);
@@ -47,6 +47,11 @@ void convolve(const float* A, const int AWidth, const int AHeight,
     for (int i = 0; i < 1000000; i++){
         convolveKernel<<<dimGrid, dimBlock>>>(d_A, AWidth, AHeight, d_K, KWidth, KHeight, d_C);
     }
+
+    hipEventRecord(stop, 0); 
+    hipEventSynchronize(stop); 
+    hipEventElapsedTime(&elapsed_msecs, start, stop); 
+    std::cout<< "GPU convolve time = " << elapsed_msecs << "ms" << std::endl;
 
     hipMemcpy(C, d_C, (AWidth*AHeight)*sizeof(float), hipMemcpyDeviceToHost);
     

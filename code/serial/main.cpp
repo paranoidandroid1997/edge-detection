@@ -46,7 +46,7 @@ int main(){
     // Blur the image and store that in blurredData and then delete the unblurred data
     float* blurredData = new float[imWidth * imHeight];
     convolve(rawData, imWidth, imHeight, gaussianKernel, 5, 5, blurredData);
-    delete rawData;
+    delete[] rawData;
 
     CImg <float>  output1(blurredData, imWidth, imHeight);
     output1.save("../../images/output/output-1.bmp");
@@ -66,15 +66,15 @@ int main(){
     float* Gy = new float[imWidth * imHeight];
     convolve(blurredData, imWidth, imHeight, sobelGx, 3, 3, Gx);
     convolve(blurredData, imWidth, imHeight, sobelGy, 3, 3, Gy);
-    delete blurredData;
+    delete[] blurredData;
 
     // Use the derivatives in the x and y direction to compute the magnitudes of the gradients
     float* magnitudes = new float[imWidth * imHeight];
     for (int i = 0; i < imWidth * imHeight; i++){
         magnitudes[i] = sqrt(Gx[i]*Gx[i] + Gy[i]*Gy[i]);
     }
-    delete Gx;
-    delete Gy;
+    delete[] Gx;
+    delete[] Gy;
 
     CImg <float>  output2(magnitudes, imWidth, imHeight);
     output2.save("../../images/output/output-2.bmp");
@@ -141,7 +141,7 @@ int main(){
             }
         }
     }
-    delete thetas;
+    delete[] thetas;
 
     CImg <float>  output3(magnitudes, imWidth, imHeight);
     output3.save("../../images/output/output-3.bmp");
@@ -210,8 +210,8 @@ int main(){
     CImg <float>  outputf(magnitudes, imWidth, imHeight);
     outputf.save("../../images/output/final-output.bmp");
 
-    delete magnitudes;
-    delete evals;
+    delete[] magnitudes;
+    delete[] evals;
 
     return 0;
 }

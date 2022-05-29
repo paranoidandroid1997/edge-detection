@@ -44,13 +44,13 @@ int main(){
 
     float* blurredData = new float[imWidth * imHeight];
     convolve(rawData, imWidth, imHeight, gaussianKernel, 5, 5, blurredData);
-    delete rawData;
+    delete[] rawData;
 
     // Feed array of pixels back into CImg and save the new image
     CImg <float>  outputf(blurredData, imWidth, imHeight);
     outputf.save("../../images/output/final-output.bmp");
 
-    delete blurredData;
+    delete[] blurredData;
 
     return 0;
 }
