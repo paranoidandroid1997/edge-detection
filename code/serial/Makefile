@@ -1,4 +1,4 @@
-CPP = hipcc
+CPP = g++
 CFLAGS = -lX11 -lpthread -std=c++11
 
 SOURCES = $(wildcard *.cpp)
@@ -14,4 +14,4 @@ edge-detection.ex: $(OBJECTS)
 
 clean:
 	rm -f edge-detection.ex $(OBJECTS) *.out *.err
-	rm -f ../images/output/output.bmp
+	rm -f ../../images/output/*.bmp

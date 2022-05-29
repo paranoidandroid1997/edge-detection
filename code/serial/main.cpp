@@ -1,5 +1,4 @@
 #include <iostream>
-#include <hip/hip_runtime.h>
 #include <cmath>
 
 #include "CImg.h"
@@ -12,7 +11,7 @@ using namespace cimg_library;
 
 int main(){
     // Load in the image
-    CImg<float> image("../images/input/test-image-4.pgm");
+    CImg<float> image("../../images/input/test-image-2.pgm");
 
     // Get useful data about the image
     int imWidth = image.width();
@@ -49,6 +48,9 @@ int main(){
     convolve(rawData, imWidth, imHeight, gaussianKernel, 5, 5, blurredData);
     delete rawData;
 
+    CImg <float>  output1(blurredData, imWidth, imHeight);
+    output1.save("../../images/output/output-1.bmp");
+
     // Define sobel operators to find the gradients in the X and Y directions
     float sobelGx[9] = {1.0f, 0.0f, -1.0f,
                          2.0f, 0.0f, -2.0f,
@@ -64,12 +66,18 @@ int main(){
     float* Gy = new float[imWidth * imHeight];
     convolve(blurredData, imWidth, imHeight, sobelGx, 3, 3, Gx);
     convolve(blurredData, imWidth, imHeight, sobelGy, 3, 3, Gy);
+    delete blurredData;
 
     // Use the derivatives in the x and y direction to compute the magnitudes of the gradients
     float* magnitudes = new float[imWidth * imHeight];
     for (int i = 0; i < imWidth * imHeight; i++){
         magnitudes[i] = sqrt(Gx[i]*Gx[i] + Gy[i]*Gy[i]);
     }
+    delete Gx;
+    delete Gy;
+
+    CImg <float>  output2(magnitudes, imWidth, imHeight);
+    output2.save("../../images/output/output-2.bmp");
 
     // Calculate gradient direction to be 1 of four directions:
     // horizontal, vertical, left to right diagonal, right to left diagonal
@@ -88,8 +96,11 @@ int main(){
         else {thetas[i] = 0;} // For some reason 3.14159 is not counted
     }
 
+    // Compare each pixel to it's two neighbors (these are decided by the direction previously calculated)
+    // If the pixel is the largest out of the three, then keep it
+    // If it's not the largest, then set it to 0
     for (int row = 1; row < imHeight - 1; row++){
-        for (int col = 0; col < imWidth - 1; col++){
+        for (int col = 1; col < imWidth - 1; col++){
             if (thetas[row*imWidth + col] == 0){
                 if (   (magnitudes[row*imWidth + col] > magnitudes[(row)*imWidth + (col + 1)])
                     && (magnitudes[row*imWidth + col] > magnitudes[(row)*imWidth + (col - 1)])){
@@ -130,16 +141,27 @@ int main(){
             }
         }
     }
+    delete thetas;
 
-    for (int i = 0; i < imHeight * imWidth; i++){
-        std::cout << magnitudes[i] << std::endl;
-    }
+    CImg <float>  output3(magnitudes, imWidth, imHeight);
+    output3.save("../../images/output/output-3.bmp");
 
-    float highThresh = 20.0f;
-    float lowThresh = 10.0f;
+    // for (int i = 0; i < imHeight * imWidth; i++){
+    //     std::cout << magnitudes[i] << std::endl;
+    // }
 
+
+    // Set high and low threshold values.
+    // Values in between low and high are "weak"
+    // Values below low are set to 0
+    // Values above high are strong
+    float highThresh =100.0f;
+    float lowThresh = 100.0f/3.0f;
+
+
+    // classify each pixel as either weak (1), strong (2), or below low (0)
+    // Store the result in a new array evals
     int* evals = new int[imWidth * imHeight];
-
     for (int i = 0; i < imWidth * imHeight; i++){
         if (magnitudes[i] < highThresh && magnitudes[i] > lowThresh){
             evals[i] = 1;
@@ -153,7 +175,13 @@ int main(){
         }
     }
 
+    CImg <float>  output4(magnitudes, imWidth, imHeight);
+    output4.save("../../images/output/output-4.bmp");
 
+
+    // Decide what to do with the weak edge pixels by checking the 8 surrounding neighbours
+    // If at least one of them is strong, then the weak pixel can stay
+    // If none are strong, then the weak pixel is set to 0
     for (int row = 1; row < imHeight - 1; row++){
         for (int col = 1; col < imWidth - 1; col++){
             if(evals[row*imWidth + col]==1){
@@ -166,23 +194,24 @@ int main(){
                    ||(evals[(row + 1)*imWidth + (col)] == 2)
                    ||(evals[(row + 1)*imWidth + (col+1)] == 2)
                    ){
-                       continue;
+                       magnitudes[row*imWidth + col] = 255;
                    }
                 else{
                     magnitudes[row*imWidth + col] = 0;
                 }
             }
+            else if (evals[row*imWidth + col] == 2){
+                 magnitudes[row*imWidth + col] = 255; 
+            }
         }
     }
-    delete Gx;
-    delete Gy;
 
     // Feed array of pixels back into CImg and save the new image
-    CImg <float>  output(magnitudes, imWidth, imHeight);
-    output.save("../images/output/output.bmp");
+    CImg <float>  outputf(magnitudes, imWidth, imHeight);
+    outputf.save("../../images/output/final-output.bmp");
 
     delete magnitudes;
-    delete thetas;
+    delete evals;
 
     return 0;
 }
