@@ -1,11 +1,14 @@
 #include <iostream>
 #include <hip/hip_runtime.h>
+#include <cmath>
 
 #include "CImg.h"
 #include "convolution.h"
 using namespace cimg_library;
 
 #include "convolution.h"
+
+#define pi 3.14159
 
 int main(){
     // Load in the image
@@ -31,17 +34,59 @@ int main(){
     }
 
     // Define a 3X3 gaussian kerenl
-    float gaussianKernel[9] = {1.0f,2.0f,1.0f,2.0f,4.0f,2.0f,1.0f,2.0f,1.0f};
-    for (int i = 0; i < 9; i++){
-        gaussianKernel[i] *= 1.0f/16.0f;
+    float gaussianKernel[25] = {2.0f,4.0f,5.0f,4.0f,2.0f,
+                                4.0f,9.0f,12.0f,9.0f,4.0f,
+                                5.0f,12.0f,15.0f,12.0f,5.0f,
+                                4.0f,9.0f,12.0f,9.0f,4.0f,
+                                2.0f,4.0f,5.0f,4.0f,2.0f};
+
+    for (int i = 0; i < 25; i++){
+        gaussianKernel[i] *= 1.0f/159.0f;
     }
 
-    convolve(rawData, imWidth, imHeight, gaussianKernel, 3, 3);
+    // Blur the image and store that in blurredData and then delete the unblurred data
+    float* blurredData = new float[imWidth * imHeight];
+    convolve(rawData, imWidth, imHeight, gaussianKernel, 5, 5, blurredData);
+    delete rawData;
 
-    // Feed array of pixels (rawData) back into CImg and save the new image
-    CImg <float>  output(rawData, imWidth, imHeight);
+    // Define sobel operators to find the gradients in the X and Y directions
+    float sobelGx[9] = {1.0f, 0.0f, -1.0f,
+                         2.0f, 0.0f, -2.0f,
+                         1.0f, 0.0f, -1.0f};
+    
+    float sobelGy[9] = {1.0f, 2.0f, 1.0f,
+                         0.0f, 0.0f, 0.0f,
+                         -1.0f, -2.0f, -1.0f};
+    
+
+    // Apply sobel operators and store the values
+    float* Gx = new float[imWidth * imHeight];
+    float* Gy = new float[imWidth * imHeight];
+    convolve(blurredData, imWidth, imHeight, sobelGx, 3, 3, Gx);
+    convolve(blurredData, imWidth, imHeight, sobelGy, 3, 3, Gy);
+
+    // Use the derivatives in the x and y direction to compute the magnitudes of the gradients
+    float* magnitudes = new float[imWidth * imHeight];
+    for (int i = 0; i < imWidth * imHeight; i++){
+        magnitudes[i] = sqrt(Gx[i]*Gx[i] + Gy[i]*Gy[i]);
+    }
+
+    float* thetas = new float[imWidth * imHeight];
+    for (int i = 0; i < imWidth * imHeight; i++){
+        thetas[i] = atan2(Gy[i], Gx[i]);
+    }
+
+
+
+    delete Gx;
+    delete Gy;
+
+    // Feed array of pixels back into CImg and save the new image
+    CImg <float>  output(magnitudes, imWidth, imHeight);
     output.save("../images/output/output.bmp");
 
-    delete rawData;
+    delete magnitudes;
+    delete thetas;
+
     return 0;
 }

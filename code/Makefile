@@ -14,3 +14,4 @@ edge-detection.ex: $(OBJECTS)
 
 clean:
 	rm -f edge-detection.ex $(OBJECTS) *.out *.err
+	rm -f ../images/output/output.bmp
