@@ -12,7 +12,7 @@ using namespace cimg_library;
 
 int main(){
     // Load in the image
-    CImg<float> image("../images/input/test-image-2.pgm");
+    CImg<float> image("../images/input/test-image-4.pgm");
 
     // Get useful data about the image
     int imWidth = image.width();
@@ -71,13 +71,109 @@ int main(){
         magnitudes[i] = sqrt(Gx[i]*Gx[i] + Gy[i]*Gy[i]);
     }
 
+    // Calculate gradient direction to be 1 of four directions:
+    // horizontal, vertical, left to right diagonal, right to left diagonal
     float* thetas = new float[imWidth * imHeight];
     for (int i = 0; i < imWidth * imHeight; i++){
         thetas[i] = atan2(Gy[i], Gx[i]);
+        if (        (thetas[i] <= pi/8 && thetas[i] > -pi/8)
+                 || (thetas[i] >= -pi && thetas[i] <= -7*pi/8)
+                 || (thetas[i] <= pi && thetas[i] > 7*pi/8)){thetas[i] = 0.0f;}
+        else if (   (thetas[i] <= 3*pi/8 && thetas[i] > pi/8)
+                 || (thetas[i] > -3*pi/8 && thetas[i] <= -pi/8)){thetas[i] = 45.0f;}
+        else if (   (thetas[i] <= 5*pi/8 && thetas[i] > 3*pi/8)
+                 || (thetas[i] > -5*pi/8 && thetas[i] <= -3*pi/8) ){thetas[i] = 90.0f;}
+        else if (   (thetas[i] <= 7*pi/8 && thetas[i] > 5*pi/8)
+                 || (thetas[i] > -7*pi/8 && thetas[i] <= -5*pi/8)){thetas[i] = 135.0f;}
+        else {thetas[i] = 0;} // For some reason 3.14159 is not counted
+    }
+
+    for (int row = 1; row < imHeight - 1; row++){
+        for (int col = 0; col < imWidth - 1; col++){
+            if (thetas[row*imWidth + col] == 0){
+                if (   (magnitudes[row*imWidth + col] > magnitudes[(row)*imWidth + (col + 1)])
+                    && (magnitudes[row*imWidth + col] > magnitudes[(row)*imWidth + (col - 1)])){
+                        continue;
+                    }
+                else {
+                    magnitudes[row*imWidth + col] = 0;
+                }
+            }
+            else if (thetas[row*imWidth + col] == 45){
+                if (   (magnitudes[row*imWidth + col] > magnitudes[(row + 1)*imWidth + (col + 1)])
+                    && (magnitudes[row*imWidth + col] > magnitudes[(row - 1)*imWidth + (col - 1)])){
+                        continue;
+                    }
+                else {
+                    magnitudes[row*imWidth + col] = 0;
+                }
+
+            }
+            else if (thetas[row*imWidth + col] == 90){
+                if (   (magnitudes[row*imWidth + col] > magnitudes[(row + 1)*imWidth + (col)])
+                    && (magnitudes[row*imWidth + col] > magnitudes[(row - 1)*imWidth + (col)])){
+                        continue;
+                    }
+                else {
+                    magnitudes[row*imWidth + col] = 0;
+                }     
+            }
+            else if (thetas[row*imWidth + col] == 135){
+                if (   (magnitudes[row*imWidth + col] > magnitudes[(row - 1)*imWidth + (col + 1)])
+                    && (magnitudes[row*imWidth + col] > magnitudes[(row + 1)*imWidth + (col - 1)])){
+                        continue;
+                    }
+                else {
+                    magnitudes[row*imWidth + col] = 0;
+                }
+                
+            }
+        }
+    }
+
+    for (int i = 0; i < imHeight * imWidth; i++){
+        std::cout << magnitudes[i] << std::endl;
+    }
+
+    float highThresh = 20.0f;
+    float lowThresh = 10.0f;
+
+    int* evals = new int[imWidth * imHeight];
+
+    for (int i = 0; i < imWidth * imHeight; i++){
+        if (magnitudes[i] < highThresh && magnitudes[i] > lowThresh){
+            evals[i] = 1;
+        }
+        else if (magnitudes[i] < lowThresh){
+            evals[i] = 0;
+            magnitudes[i] = 0;
+        }
+        else {
+            evals[i] = 2;
+        }
     }
 
 
-
+    for (int row = 1; row < imHeight - 1; row++){
+        for (int col = 1; col < imWidth - 1; col++){
+            if(evals[row*imWidth + col]==1){
+                if(  (evals[(row - 1)*imWidth + (col - 1)] == 2)
+                   ||(evals[(row - 1)*imWidth + (col)] == 2)
+                   ||(evals[(row - 1)*imWidth + (col + 1)] == 2)
+                   ||(evals[(row)*imWidth + (col - 1)] == 2)
+                   ||(evals[(row)*imWidth + (col + 1)] == 2)
+                   ||(evals[(row + 1)*imWidth + (col - 1)] == 2)
+                   ||(evals[(row + 1)*imWidth + (col)] == 2)
+                   ||(evals[(row + 1)*imWidth + (col+1)] == 2)
+                   ){
+                       continue;
+                   }
+                else{
+                    magnitudes[row*imWidth + col] = 0;
+                }
+            }
+        }
+    }
     delete Gx;
     delete Gy;
 
