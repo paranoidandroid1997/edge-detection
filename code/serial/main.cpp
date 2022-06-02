@@ -1,8 +1,9 @@
 #include <iostream>
 #include <cmath>
+#include <chrono>
+using namespace std::chrono;
 
 #include "CImg.h"
-#include "convolution.h"
 using namespace cimg_library;
 
 #include "convolution.h"
@@ -69,10 +70,16 @@ int main(){
     delete[] blurredData;
 
     // Use the derivatives in the x and y direction to compute the magnitudes of the gradients
+    auto start = high_resolution_clock::now();
     float* magnitudes = new float[imWidth * imHeight];
-    for (int i = 0; i < imWidth * imHeight; i++){
-        magnitudes[i] = sqrt(Gx[i]*Gx[i] + Gy[i]*Gy[i]);
+    for (int k = 0; k< 10000; k++){
+        for (int i = 0; i < imWidth * imHeight; i++){
+            magnitudes[i] = sqrt(Gx[i]*Gx[i] + Gy[i]*Gy[i]);
+        }
     }
+    auto stop = high_resolution_clock::now();
+    double duration = duration_cast<milliseconds>(stop - start);
+    std::cout << "Serial magnitudes duration = " << duration.count() << "ms" << std::endl;
     delete[] Gx;
     delete[] Gy;
 

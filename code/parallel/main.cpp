@@ -5,6 +5,7 @@
 using namespace cimg_library;
 
 #include "convolution.h"
+#include "magnitudes.h"
 
 #define pi 3.14159;
 
@@ -46,11 +47,33 @@ int main(){
     convolve(rawData, imWidth, imHeight, gaussianKernel, 5, 5, blurredData);
     delete[] rawData;
 
+    // Define sobel operators to find the gradients in the x and y directions
+    float sobelGx[9] = {1.0f, 0.0f, -1.0f,
+                         2.0f, 0.0f, -2.0f,
+                         1.0f, 0.0f, -1.0f};
+    
+    float sobelGy[9] = {1.0f, 2.0f, 1.0f,
+                         0.0f, 0.0f, 0.0f,
+                         -1.0f, -2.0f, -1.0f};
+    
+    // Apply sobel operators and store the values
+    float* Gx = new float[imWidth * imHeight];
+    float* Gy = new float[imWidth * imHeight];
+    convolve(blurredData, imWidth, imHeight, sobelGx, 3, 3, Gx);
+    convolve(blurredData, imWidth, imHeight, sobelGy, 3, 3, Gy);
+    delete[] blurredData;
+
+    // Use the derivatives in the x and y direction to compute the magnitudes of the gradients
+    float* magnitudes = new float[imWidth * imHeight];
+    findMagnitudes(Gx, Gy, magnitudes, imSize);
+    delete[] Gx;
+    delete[] Gy;
+
     // Feed array of pixels back into CImg and save the new image
-    CImg <float>  outputf(blurredData, imWidth, imHeight);
+    CImg <float>  outputf(magnitudes, imWidth, imHeight);
     outputf.save("../../images/output/final-output.bmp");
 
-    delete[] blurredData;
+    delete[] magnitudes;
 
     return 0;
 }
