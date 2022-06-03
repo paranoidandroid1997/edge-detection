@@ -9,6 +9,7 @@ using namespace cimg_library;
 #include "thetas.h"
 #include "classify.h"
 #include "compare.h"
+#include "neighbour.h"
 
 int main(){
     for (int y = 0; y < 100; y++){
@@ -103,13 +104,17 @@ int main(){
     classify(evals, newMagnitudes, highThresh, lowThresh, imSize);
     hipDeviceSynchronize();
 
+    float* finalPixels = new float[imWidth * imHeight];
+    neighbourCheck(finalPixels, newMagnitudes, evals, imHeight, imWidth);
+    hipDeviceSynchronize();
+    delete[] newMagnitudes;
 
     // Feed array of pixels back into CImg and save the new image
-    CImg <float>  outputf(newMagnitudes, imWidth, imHeight);
+    CImg <float>  outputf(finalPixels, imWidth, imHeight);
     outputf.save("../../images/output/final-output.bmp");
 
     delete[] evals;
-    delete[] newMagnitudes;
+    delete[] finalPixels;
 
     std::cout << y << std::endl;
     std::cout << std::endl;

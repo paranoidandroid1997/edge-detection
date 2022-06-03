@@ -63,8 +63,6 @@ void compare(float newMagnitudes[], float magnitudes[], float thetas[],  int imH
     dim3 dimBlock(BLOCK_SIZE, BLOCK_SIZE);
     dim3 dimGrid(((dimBlock.x - 1) + imWidth) / dimBlock.x, ((dimBlock.y - 1) + imHeight)/ dimBlock.y);
 
-    std::cout << imWidth << imHeight  << std::endl;
-
     std::cout << "Launching Compare Kernel" << std::endl; 
     std::cout << "The Block Dimension is " << dimBlock.x << " X " << dimBlock.y << std::endl; 
     std::cout << "The Grid Dimension is " << dimGrid.x << " X " << dimGrid.y << std::endl;  
