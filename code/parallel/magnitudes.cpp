@@ -2,8 +2,10 @@
 
 #include "magnitudes.h"
 
-__global__ void findMagnitudesKernel(float d_Gx[], float d_Gy[], float d_magnitudes[]){
+__global__ void findMagnitudesKernel(float d_Gx[], float d_Gy[], float d_magnitudes[], int imSize){
     int tid = blockIdx.x * blockDim.x + threadIdx.x;
+
+    if (tid >= imSize) return;
 
     d_magnitudes[tid] = sqrt(d_Gx[tid] * d_Gx[tid] + d_Gy[tid] * d_Gy[tid]);
 }
@@ -34,7 +36,7 @@ void findMagnitudes(float Gx[], float Gy[], float magnitudes[], int imSize){
     hipEventRecord(start, 0);
 
     for (int i = 0; i < 1; i++){
-        findMagnitudesKernel<<<((BLOCK_SIZE - 1) + imSize)/ BLOCK_SIZE, BLOCK_SIZE>>>(d_Gx, d_Gy, d_magnitudes);
+        findMagnitudesKernel<<<((BLOCK_SIZE - 1) + imSize)/ BLOCK_SIZE, BLOCK_SIZE>>>(d_Gx, d_Gy, d_magnitudes, imSize);
     }
 
     hipEventRecord(stop, 0); 

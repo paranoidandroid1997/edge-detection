@@ -3,7 +3,7 @@
 
 #include <hip/hip_runtime.h>
 
-__global__ void findThetasKernel(float*, float*, float*);
+__global__ void findThetasKernel(float*, float*, float*, int);
 void findThetas(float*, float*, float*, int);
 
 #endif

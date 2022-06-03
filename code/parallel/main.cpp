@@ -12,7 +12,7 @@ using namespace cimg_library;
 #include "neighbour.h"
 
 int main(){
-    for (int y = 0; y < 100; y++){
+    for (int y = 0; y < 1; y++){
 
     // Load in the image
     CImg<float> image("../../images/input/test-image-2.pgm");
@@ -111,7 +111,7 @@ int main(){
 
     // Feed array of pixels back into CImg and save the new image
     CImg <float>  outputf(finalPixels, imWidth, imHeight);
-    outputf.save("../../images/output/final-output.bmp");
+    outputf.save("../../images/output/final-output-real.bmp");
 
     delete[] evals;
     delete[] finalPixels;

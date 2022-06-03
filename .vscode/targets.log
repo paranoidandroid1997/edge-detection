@@ -5,8 +5,9 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
+ 
 
-# Make data base, printed on Thu Jun  2 21:16:28 2022
+# Make data base, printed on Fri Jun  3 10:59:06 2022
 
 # Variables
 
@@ -90,7 +91,7 @@ _LMFILES__modshare = /cm/local/modulefiles/slurm/slurm/20.11.8:1
 # environment
 KRB5CCNAME = KEYRING:persistent:273096
 # environment
-SSH_CONNECTION = 128.114.220.62 53861 128.114.183.225 22
+SSH_CONNECTION = 128.114.221.194 61383 128.114.183.226 22
 # environment
 PATH = /home/hwaterho/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/cm/local/apps/environment-modules/4.5.3//bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin:/opt/dell/srvadmin/bin:/home/hwaterho/.local/bin:/home/hwaterho/bin:/home/hwaterho/.local/bin:/home/hwaterho/bin
 # environment
@@ -116,7 +117,7 @@ VSCODE_PIPE_LOGGING = true
 # environment
 PWD = /home/hwaterho/gpu-programming/edge-detection
 # environment
-VSCODE_IPC_HOOK_CLI = /run/user/273096/vscode-ipc-e9f392d0-e152-40a7-9cd2-36f389e6cce0.sock
+VSCODE_IPC_HOOK_CLI = /run/user/273096/vscode-ipc-86416724-7143-43e8-8c2e-c9d634e5e1fe.sock
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
@@ -140,7 +141,7 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
-HOSTNAME = lux-0
+HOSTNAME = lux-1
 # environment
 MAKELEVEL := 0
 # default
@@ -150,7 +151,7 @@ MAKECMDGOALS := all
 # environment
 SHLVL = 5
 # environment
-XDG_SESSION_ID = 72047
+XDG_SESSION_ID = 69924
 # environment
 USER = hwaterho
 # makefile
@@ -220,6 +221,9 @@ CMD_WLM_CLUSTER_NAME = slurm
 # environment
 PATH_modshare = /cm/shared/apps/slurm/current/bin:1:/cm/local/apps/environment-modules/4.5.3//bin:1:/usr/sbin:1:/usr/bin:1:/cm/local/apps/environment-modules/4.5.3/bin:1:/opt/dell/srvadmin/bin:1:/usr/local/sbin:1:/cm/shared/apps/slurm/current/sbin:1:/usr/local/bin:1:/sbin:1
 # default
+ 
+make: *** No rule to make target `all'.  Stop.
+
 .VARIABLES := 
 # automatic
 *F = $(notdir $*)
@@ -228,7 +232,7 @@ MAKEFLAGS = Rrqp
 # environment
 MFLAGS = -Rrqp
 # environment
-SSH_CLIENT = 128.114.220.62 53861 22
+SSH_CLIENT = 128.114.221.194 61383 22
 # environment
 MAIL = /var/spool/mail/hwaterho
 # environment
@@ -345,8 +349,6 @@ GNUmakefile:
 
 # strcache hash-table stats:
 # Load=16/8192=0%, Rehash=0, Collisions=1/19=5%
-# Finished Make data base on Thu Jun  2 21:16:28 2022
+# Finished Make data base on Fri Jun  3 10:59:06 2022
 
  
-make: *** No rule to make target `all'.  Stop.
-

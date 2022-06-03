@@ -3,7 +3,7 @@
 
 #include <hip/hip_runtime.h>
 
-__global__ void findMagnitudesKernel(float*, float*, float*);
+__global__ void findMagnitudesKernel(float*, float*, float*, int);
 void findMagnitudes(float*, float*, float*, int);
 
 #endif

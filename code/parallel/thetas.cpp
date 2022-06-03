@@ -4,7 +4,7 @@
 
 #define pi 3.14159
 
-__global__ void findThetasKernel(float d_Gx[], float d_Gy[], float d_thetas[]){
+__global__ void findThetasKernel(float d_Gx[], float d_Gy[], float d_thetas[], int imSize){
     int tid = blockIdx.x * blockDim.x + threadIdx.x;
 
     float temp = atan2(d_Gy[tid], d_Gx[tid]);
@@ -46,7 +46,7 @@ void findThetas(float Gx[], float Gy[], float thetas[], int imSize){
     hipEventRecord(start, 0);
 
     for (int i = 0; i < 1; i++){
-        findThetasKernel<<<((BLOCK_SIZE - 1) + imSize)/ BLOCK_SIZE, BLOCK_SIZE>>>(d_Gx, d_Gy, d_thetas);
+        findThetasKernel<<<((BLOCK_SIZE - 1) + imSize)/ BLOCK_SIZE, BLOCK_SIZE>>>(d_Gx, d_Gy, d_thetas, imSize);
     }
 
     hipEventRecord(stop, 0); 

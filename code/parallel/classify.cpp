@@ -2,8 +2,10 @@
 
 #include "classify.h"
 
-__global__ void classifyKernel(int d_evals[], float d_magnitudes[], float highThresh, float lowThresh){
+__global__ void classifyKernel(int d_evals[], float d_magnitudes[], float highThresh, float lowThresh, int imSize){
     int tid = blockIdx.x * blockDim.x + threadIdx.x;
+
+    if (tid >= imSize) return;
 
     if (d_magnitudes[tid] < highThresh && d_magnitudes[tid] > lowThresh){
         d_evals[tid] = 1;
@@ -40,7 +42,7 @@ void classify(int evals[], float magnitudes[], float highThresh, float lowThresh
     hipEventRecord(start, 0);
 
     for (int i = 0; i < 1; i++){
-        classifyKernel<<<((BLOCK_SIZE - 1) + imSize)/ BLOCK_SIZE, BLOCK_SIZE>>>(d_evals, d_magnitudes, highThresh, lowThresh); 
+        classifyKernel<<<((BLOCK_SIZE - 1) + imSize)/ BLOCK_SIZE, BLOCK_SIZE>>>(d_evals, d_magnitudes, highThresh, lowThresh, imSize); 
     }
 
     hipEventRecord(stop, 0); 
