@@ -6,10 +6,13 @@ using namespace cimg_library;
 
 #include "convolution.h"
 #include "magnitudes.h"
-
-#define pi 3.14159;
+#include "thetas.h"
+#include "classify.h"
+#include "compare.h"
 
 int main(){
+    for (int y = 0; y < 100; y++){
+
     // Load in the image
     CImg<float> image("../../images/input/test-image-2.pgm");
 
@@ -45,6 +48,7 @@ int main(){
 
     float* blurredData = new float[imWidth * imHeight];
     convolve(rawData, imWidth, imHeight, gaussianKernel, 5, 5, blurredData);
+    hipDeviceSynchronize();
     delete[] rawData;
 
     // Define sobel operators to find the gradients in the x and y directions
@@ -60,20 +64,56 @@ int main(){
     float* Gx = new float[imWidth * imHeight];
     float* Gy = new float[imWidth * imHeight];
     convolve(blurredData, imWidth, imHeight, sobelGx, 3, 3, Gx);
+    hipDeviceSynchronize();
     convolve(blurredData, imWidth, imHeight, sobelGy, 3, 3, Gy);
+    hipDeviceSynchronize();
+
     delete[] blurredData;
 
     // Use the derivatives in the x and y direction to compute the magnitudes of the gradients
     float* magnitudes = new float[imWidth * imHeight];
     findMagnitudes(Gx, Gy, magnitudes, imSize);
+    hipDeviceSynchronize();
     delete[] Gx;
     delete[] Gy;
 
+    float* thetas = new float[imWidth * imHeight];
+    findThetas(Gx, Gy, thetas, imSize);
+    hipDeviceSynchronize();
+
+    // Compare each pixel to it's two neighbors (these are decided by the direction previously calculated)
+    // If the pixel is the largest out of the three, then keep it
+    // If it's not the largest, then set it to 0
+    float* newMagnitudes = new float[imWidth * imHeight];
+    compare(newMagnitudes, magnitudes, thetas, imHeight, imWidth);
+    hipDeviceSynchronize();
+    delete[] thetas;
+    delete[] magnitudes;
+
+    // Set high and low threshold values.
+    // Values in between low and high are "weak"
+    // Values below low are set to 0
+    // Values above high are strong
+    float highThresh =100.0f;
+    float lowThresh = 100.0f/3.0f;
+
+    // classify each pixel as either weak (1), strong (2), or below low (0)
+    // Store the result in a new array evals
+    int* evals = new int[imWidth * imHeight];
+    classify(evals, newMagnitudes, highThresh, lowThresh, imSize);
+    hipDeviceSynchronize();
+
+
     // Feed array of pixels back into CImg and save the new image
-    CImg <float>  outputf(magnitudes, imWidth, imHeight);
+    CImg <float>  outputf(newMagnitudes, imWidth, imHeight);
     outputf.save("../../images/output/final-output.bmp");
 
-    delete[] magnitudes;
+    delete[] evals;
+    delete[] newMagnitudes;
+
+    std::cout << y << std::endl;
+    std::cout << std::endl;
+    }
 
     return 0;
 }

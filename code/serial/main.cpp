@@ -78,7 +78,7 @@ int main(){
         }
     }
     auto stop = high_resolution_clock::now();
-    double duration = duration_cast<milliseconds>(stop - start);
+    auto duration = duration_cast<milliseconds>(stop - start);
     std::cout << "Serial magnitudes duration = " << duration.count() << "ms" << std::endl;
     delete[] Gx;
     delete[] Gy;
