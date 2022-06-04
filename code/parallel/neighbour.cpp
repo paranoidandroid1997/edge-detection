@@ -6,7 +6,8 @@ __global__ void neighbourCheckKernel(float d_finalPixels[], float d_newMagnitude
     int imRow = blockIdx.y * blockDim.y + threadIdx.y;
     int imCol = blockIdx.x * blockDim.x + threadIdx.x;
 
-    if (imRow >= imHeight || imCol >= imWidth) return;
+    if (imRow >= imHeight - 1 || imCol >= imWidth - 1) return;
+    if (imRow == 0 || imCol == 0 ) return;
 
     if(d_evals[imRow*imWidth + imCol]==1){
         if(  (d_evals[(imRow - 1)*imWidth + (imCol - 1)] == 2)

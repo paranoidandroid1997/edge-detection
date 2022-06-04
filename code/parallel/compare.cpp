@@ -6,7 +6,9 @@ __global__ void compareKernel(float d_newMagnitudes[], float d_magnitudes[], flo
     int imRow = blockIdx.y * blockDim.y + threadIdx.y;
     int imCol = blockIdx.x * blockDim.x + threadIdx.x;
 
-    if (imRow >= imHeight || imCol >= imWidth) return;
+
+    if (imRow >= imHeight - 1 || imCol >= imWidth - 1) return;
+    if (imRow == 0 || imCol == 0 ) return;
 
     if (d_thetas[imRow*imWidth + imCol] == 0){
         if (   (d_magnitudes[imRow*imWidth + imCol] > d_magnitudes[(imRow)*imWidth + (imCol + 1)])

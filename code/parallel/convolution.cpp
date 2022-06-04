@@ -6,7 +6,8 @@ __global__ void convolveKernel(const float* d_A, const int d_AWidth, const int d
     int imRow = blockIdx.y * blockDim.y + threadIdx.y;
     int imCol = blockIdx.x * blockDim.x + threadIdx.x;
 
-    if (imRow >= d_AHeight || imCol >= d_AWidth) return;
+    if (imRow >= d_AHeight - 1 || imCol >= d_AWidth - 1) return;
+    if (imRow == 0 || imCol == 0 ) return;
 
     float newVal = 0.0f;
     for (int kerRow = 0; kerRow < d_KHeight; kerRow++){
