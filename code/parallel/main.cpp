@@ -36,6 +36,12 @@ int main(){
         }
     }
 
+    CImg <float>  output1(rawData, imWidth, imHeight);
+    output1.save("../../images/output/original-image.bmp");
+
+    for (int i = 0; i < 100; i++){
+
+
     // Define a 5X5 gaussian kerenl
     float gaussianKernel[25] = {2.0f,4.0f,5.0f,4.0f,2.0f,
                                 4.0f,9.0f,12.0f,9.0f,4.0f,
@@ -51,6 +57,9 @@ int main(){
     convolve(rawData, imWidth, imHeight, gaussianKernel, 5, 5, blurredData);
     hipDeviceSynchronize();
     delete[] rawData;
+
+    CImg <float>  output2(blurredData, imWidth, imHeight);
+    output2.save("../../images/output/blurred-image.bmp");
 
     // Define sobel operators to find the gradients in the x and y directions
     float sobelGx[9] = {1.0f, 0.0f, -1.0f,
@@ -78,6 +87,9 @@ int main(){
     delete[] Gx;
     delete[] Gy;
 
+    CImg <float>  output3(magnitudes, imWidth, imHeight);
+    output3.save("../../images/output/magnitudes-image.bmp");
+
     float* thetas = new float[imWidth * imHeight];
     findThetas(Gx, Gy, thetas, imSize);
     hipDeviceSynchronize();
@@ -91,12 +103,15 @@ int main(){
     delete[] thetas;
     delete[] magnitudes;
 
+    CImg <float>  output4(newMagnitudes, imWidth, imHeight);
+    output4.save("../../images/output/after-neighbourcompare-image.bmp");
+
     // Set high and low threshold values.
     // Values in between low and high are "weak"
     // Values below low are set to 0
     // Values above high are strong
     float highThresh =100.0f;
-    float lowThresh = 100.0f/3.0f;
+    float lowThresh = 60.0f;
 
     // classify each pixel as either weak (1), strong (2), or below low (0)
     // Store the result in a new array evals
@@ -104,6 +119,12 @@ int main(){
     classify(evals, newMagnitudes, highThresh, lowThresh, imSize);
     hipDeviceSynchronize();
 
+    CImg <float>  output5(newMagnitudes, imWidth, imHeight);
+    output5.save("../../images/output/after-thresholding-image.bmp");
+
+    // Decide what to do with the weak edge pixels by checking the 8 surrounding neighbours
+    // If at least one of them is strong, then the weak pixel can stay
+    // If none are strong, then the weak pixel is set to 0
     float* finalPixels = new float[imWidth * imHeight];
     neighbourCheck(finalPixels, newMagnitudes, evals, imHeight, imWidth);
     hipDeviceSynchronize();
@@ -118,6 +139,7 @@ int main(){
 
     std::cout << y << std::endl;
     std::cout << std::endl;
+    }
     }
 
     return 0;

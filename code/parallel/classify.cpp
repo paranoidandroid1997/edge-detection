@@ -5,7 +5,7 @@
 __global__ void classifyKernel(int d_evals[], float d_magnitudes[], float highThresh, float lowThresh, int imSize){
     int tid = blockIdx.x * blockDim.x + threadIdx.x;
 
-    if (tid >= imSize) return;
+    if ( tid >= imSize) return;
 
     if (d_magnitudes[tid] < highThresh && d_magnitudes[tid] > lowThresh){
         d_evals[tid] = 1;
@@ -51,6 +51,7 @@ void classify(int evals[], float magnitudes[], float highThresh, float lowThresh
     std::cout<< "GPU classify time = " << elapsed_msecs << "ms" << std::endl;
 
     hipMemcpy(evals, d_evals, (imSize)*sizeof(int), hipMemcpyDeviceToHost);
+    hipMemcpy(magnitudes, d_magnitudes, (imSize)*sizeof(float), hipMemcpyDeviceToHost);
     
     hipFree(d_evals);
     hipFree(d_magnitudes);

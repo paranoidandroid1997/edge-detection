@@ -1,11 +1,12 @@
 CPP = g++
-CFLAGS = -lX11 -lpthread -std=c++11
+LFLAGS = -lX11 -lpthread
+CFLAGS = -std=c++11
 
 SOURCES = $(wildcard *.cpp)
 OBJECTS = $(subst .cpp,.o,$(SOURCES))
 
 edge-detection.ex: $(OBJECTS)
-	$(CPP) $(CFLAGS) -o $@ $(OBJECTS) 
+	$(CPP) $(LFLAGS) $(CFLAGS) -o $@ $(OBJECTS) 
 
 %.o: %.cpp
 	$(CPP) $(CFLAGS) -c $<
@@ -15,3 +16,5 @@ edge-detection.ex: $(OBJECTS)
 clean:
 	rm -f edge-detection.ex $(OBJECTS) *.out *.err
 	rm -f ../../images/output/*.bmp
+
+

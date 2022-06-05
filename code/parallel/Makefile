@@ -1,11 +1,12 @@
 CPP = hipcc
-CFLAGS = -lX11 -lpthread -std=c++11
+LFLAGS = -lX11 -lpthread
+CFLAGS = -std=c++11
 
 SOURCES = $(wildcard *.cpp)
 OBJECTS = $(subst .cpp,.o,$(SOURCES))
 
 edge-detection.ex: $(OBJECTS)
-	$(CPP) $(CFLAGS) -o $@ $(OBJECTS) 
+	$(CPP) $(CFLAGS) $(LFLAGS) -o $@ $(OBJECTS) 
 
 %.o: %.cpp
 	$(CPP) $(CFLAGS) -c $<
