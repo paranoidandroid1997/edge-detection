@@ -46,7 +46,13 @@ int main(){
 
     // Blur the image and store that in blurredData and then delete the unblurred data
     float* blurredData = new float[imWidth * imHeight];
+    auto start = high_resolution_clock::now();
+    for (int k = 0; k < 1; k++){
     convolve(rawData, imWidth, imHeight, gaussianKernel, 5, 5, blurredData);
+    }
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<milliseconds>(stop - start);
+    std::cout << "Serial convolve duration = " << duration.count() << "ms" << std::endl;
     delete[] rawData;
 
     CImg <float>  output1(blurredData, imWidth, imHeight);
@@ -70,15 +76,15 @@ int main(){
     delete[] blurredData;
 
     // Use the derivatives in the x and y direction to compute the magnitudes of the gradients
-    auto start = high_resolution_clock::now();
+    start = high_resolution_clock::now();
     float* magnitudes = new float[imWidth * imHeight];
-    for (int k = 0; k< 10000; k++){
+    for (int k = 0; k < 10000; k++){
         for (int i = 0; i < imWidth * imHeight; i++){
             magnitudes[i] = sqrt(Gx[i]*Gx[i] + Gy[i]*Gy[i]);
         }
     }
-    auto stop = high_resolution_clock::now();
-    auto duration = duration_cast<milliseconds>(stop - start);
+    stop = high_resolution_clock::now();
+    duration = duration_cast<milliseconds>(stop - start);
     std::cout << "Serial magnitudes duration = " << duration.count() << "ms" << std::endl;
     delete[] Gx;
     delete[] Gy;

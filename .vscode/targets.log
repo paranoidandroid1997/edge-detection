@@ -6,8 +6,10 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
  
+make: *** No rule to make target `all'.  Stop.
 
-# Make data base, printed on Fri Jun  3 10:59:06 2022
+
+# Make data base, printed on Thu Oct 13 08:38:42 2022
 
 # Variables
 
@@ -19,8 +21,6 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 .SHELLFLAGS := -c
 # environment
 VSCODE_AGENT_FOLDER = /home/hwaterho/.vscode-server
-# environment
-VSCODE_LOG_NATIVE = false
 # environment
 MODULEPATH = /cm/local/modulefiles:/cm/shared/modulefiles
 # automatic
@@ -81,8 +81,6 @@ endef
 # environment
 XDG_DATA_DIRS = /home/hwaterho/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
 # environment
-VSCODE_VERBOSE_LOGGING = true
-# environment
 LESSOPEN = ||/usr/bin/lesspipe.sh %s
 # environment
 VSCODE_CWD = /home/hwaterho
@@ -91,9 +89,9 @@ _LMFILES__modshare = /cm/local/modulefiles/slurm/slurm/20.11.8:1
 # environment
 KRB5CCNAME = KEYRING:persistent:273096
 # environment
-SSH_CONNECTION = 128.114.221.194 61383 128.114.183.226 22
+SSH_CONNECTION = 128.114.220.253 49414 128.114.183.227 22
 # environment
-PATH = /home/hwaterho/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/cm/local/apps/environment-modules/4.5.3//bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin:/opt/dell/srvadmin/bin:/home/hwaterho/.local/bin:/home/hwaterho/bin:/home/hwaterho/.local/bin:/home/hwaterho/bin
+PATH = /home/hwaterho/.vscode-server/bin/129500ee4c8ab7263461ffe327268ba56b9f210d/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/cm/local/apps/environment-modules/4.5.3//bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin:/opt/dell/srvadmin/bin:/home/hwaterho/.local/bin:/home/hwaterho/bin:/home/hwaterho/.local/bin:/home/hwaterho/bin
 # environment
 XDG_RUNTIME_DIR = /run/user/273096
 # environment
@@ -105,7 +103,7 @@ CPATH = /cm/shared/apps/slurm/current/include
 # environment
 BASH_ENV = /cm/local/apps/environment-modules/4.5.3//init/bash
 # environment
-VSCODE_LOG_STACK = false
+ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver check-symlink
 # automatic
@@ -113,11 +111,9 @@ VSCODE_LOG_STACK = false
 # environment
 SLURM_CONF = /cm/shared/apps/slurm/var/etc/slurm/slurm.conf
 # environment
-VSCODE_PIPE_LOGGING = true
-# environment
 PWD = /home/hwaterho/gpu-programming/edge-detection
 # environment
-VSCODE_IPC_HOOK_CLI = /run/user/273096/vscode-ipc-86416724-7143-43e8-8c2e-c9d634e5e1fe.sock
+VSCODE_IPC_HOOK_CLI = /run/user/273096/vscode-ipc-aa177153-181b-4c76-98fa-10aa24528a1c.sock
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
@@ -133,7 +129,7 @@ MODULESHOME = /cm/local/apps/environment-modules/4.5.3/
 # environment
 LOGNAME = hwaterho
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # automatic
 +F = $(notdir $+)
 # environment
@@ -141,7 +137,7 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
-HOSTNAME = lux-1
+HOSTNAME = lux-0
 # environment
 MAKELEVEL := 0
 # default
@@ -151,7 +147,7 @@ MAKECMDGOALS := all
 # environment
 SHLVL = 5
 # environment
-XDG_SESSION_ID = 69924
+XDG_SESSION_ID = 199159
 # environment
 USER = hwaterho
 # makefile
@@ -221,9 +217,6 @@ CMD_WLM_CLUSTER_NAME = slurm
 # environment
 PATH_modshare = /cm/shared/apps/slurm/current/bin:1:/cm/local/apps/environment-modules/4.5.3//bin:1:/usr/sbin:1:/usr/bin:1:/cm/local/apps/environment-modules/4.5.3/bin:1:/opt/dell/srvadmin/bin:1:/usr/local/sbin:1:/cm/shared/apps/slurm/current/sbin:1:/usr/local/bin:1:/sbin:1
 # default
- 
-make: *** No rule to make target `all'.  Stop.
-
 .VARIABLES := 
 # automatic
 *F = $(notdir $*)
@@ -232,7 +225,7 @@ MAKEFLAGS = Rrqp
 # environment
 MFLAGS = -Rrqp
 # environment
-SSH_CLIENT = 128.114.221.194 61383 22
+SSH_CLIENT = 128.114.220.253 49414 22
 # environment
 MAIL = /var/spool/mail/hwaterho
 # environment
@@ -244,7 +237,7 @@ LIBRARY_PATH_modshare = /cm/shared/apps/slurm/current/lib64:1:/cm/shared/apps/sl
 # environment
 CPATH_modshare = /cm/shared/apps/slurm/current/include:1
 # environment
-BROWSER = /home/hwaterho/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5/bin/helpers/browser.sh
+BROWSER = /home/hwaterho/.vscode-server/bin/129500ee4c8ab7263461ffe327268ba56b9f210d/bin/helpers/browser.sh
 # environment
 VSCODE_HANDLES_SIGPIPE = true
 # default
@@ -273,10 +266,8 @@ LD_LIBRARY_PATH_modshare = /cm/shared/apps/slurm/current/lib64:1:/cm/shared/apps
 ENV = /cm/local/apps/environment-modules/4.5.3//init/profile.sh
 # environment
 LANG = C
-# environment
-VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # variable set hash-table stats:
-# Load=90/1024=9%, Rehash=0, Collisions=6/109=6%
+# Load=86/1024=8%, Rehash=0, Collisions=6/105=6%
 
 # Pattern-specific Variable Values
 
@@ -349,6 +340,6 @@ GNUmakefile:
 
 # strcache hash-table stats:
 # Load=16/8192=0%, Rehash=0, Collisions=1/19=5%
-# Finished Make data base on Fri Jun  3 10:59:06 2022
+# Finished Make data base on Thu Oct 13 08:38:42 2022
 
  
