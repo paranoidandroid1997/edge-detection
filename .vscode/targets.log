@@ -5,11 +5,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
- 
-make: *** No rule to make target `all'.  Stop.
 
-
-# Make data base, printed on Thu Oct 13 08:38:42 2022
+# Make data base, printed on Thu Oct 13 09:14:11 2022
 
 # Variables
 
@@ -89,7 +86,7 @@ _LMFILES__modshare = /cm/local/modulefiles/slurm/slurm/20.11.8:1
 # environment
 KRB5CCNAME = KEYRING:persistent:273096
 # environment
-SSH_CONNECTION = 128.114.220.253 49414 128.114.183.227 22
+SSH_CONNECTION = 128.114.220.253 49787 128.114.183.226 22
 # environment
 PATH = /home/hwaterho/.vscode-server/bin/129500ee4c8ab7263461ffe327268ba56b9f210d/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/cm/local/apps/environment-modules/4.5.3//bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin:/opt/dell/srvadmin/bin:/home/hwaterho/.local/bin:/home/hwaterho/bin:/home/hwaterho/.local/bin:/home/hwaterho/bin
 # environment
@@ -113,7 +110,7 @@ SLURM_CONF = /cm/shared/apps/slurm/var/etc/slurm/slurm.conf
 # environment
 PWD = /home/hwaterho/gpu-programming/edge-detection
 # environment
-VSCODE_IPC_HOOK_CLI = /run/user/273096/vscode-ipc-aa177153-181b-4c76-98fa-10aa24528a1c.sock
+VSCODE_IPC_HOOK_CLI = /run/user/273096/vscode-ipc-ac290665-30ca-4bd2-91ff-42e71fb82789.sock
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
@@ -137,7 +134,7 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
-HOSTNAME = lux-0
+HOSTNAME = lux-1
 # environment
 MAKELEVEL := 0
 # default
@@ -147,7 +144,7 @@ MAKECMDGOALS := all
 # environment
 SHLVL = 5
 # environment
-XDG_SESSION_ID = 199159
+XDG_SESSION_ID = 198011
 # environment
 USER = hwaterho
 # makefile
@@ -225,7 +222,7 @@ MAKEFLAGS = Rrqp
 # environment
 MFLAGS = -Rrqp
 # environment
-SSH_CLIENT = 128.114.220.253 49414 22
+SSH_CLIENT = 128.114.220.253 49787 22
 # environment
 MAIL = /var/spool/mail/hwaterho
 # environment
@@ -275,9 +272,9 @@ LANG = C
 
 # Directories
 
-# . (device 1991046868, inode 144120372587997854): 8 files, no impossibilities.
+# . (device 1991046868, inode 144120372587997854): 9 files, no impossibilities.
 
-# 8 files, no impossibilities in 1 directories.
+# 9 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -333,13 +330,15 @@ GNUmakefile:
 
 # No general (`VPATH' variable) search path.
 
-# # of strings in strcache: 0 / lookups = 19 / hits = 19
+# # of strings in strcache: 0 / lookups = 20 / hits = 20
 # # of strcache buffers: 1 (* 8176 B/buffer = 8176 B)
-# strcache used: total = 0 (136) / max = 0 / min = 8176 / avg = 0
-# strcache free: total = 0 (8040) / max = 0 / min = 8176 / avg = 0
+# strcache used: total = 0 (144) / max = 0 / min = 8176 / avg = 0
+# strcache free: total = 0 (8032) / max = 0 / min = 8176 / avg = 0
 
 # strcache hash-table stats:
-# Load=16/8192=0%, Rehash=0, Collisions=1/19=5%
-# Finished Make data base on Thu Oct 13 08:38:42 2022
+# Load=17/8192=0%, Rehash=0, Collisions=1/20=5%
+# Finished Make data base on Thu Oct 13 09:14:11 2022
 
  
+make: *** No rule to make target `all'.  Stop.
+

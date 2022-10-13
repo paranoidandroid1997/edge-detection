@@ -15,7 +15,7 @@ int main(){
     for (int y = 0; y < 1; y++){
 
     // Load in the image
-    CImg<float> image("../../images/input/test-image-2.pgm");
+    CImg<float> image("../../images/input/test-image-6.pgm");
 
     // Get useful data about the image
     int imWidth = image.width();

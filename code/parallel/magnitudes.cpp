@@ -35,7 +35,7 @@ void findMagnitudes(float Gx[], float Gy[], float magnitudes[], int imSize){
     hipEventCreate(&stop); 
     hipEventRecord(start, 0);
 
-    for (int i = 0; i < 10000; i++){
+    for (int i = 0; i < 2; i++){
         findMagnitudesKernel<<<((BLOCK_SIZE - 1) + imSize)/ BLOCK_SIZE, BLOCK_SIZE>>>(d_Gx, d_Gy, d_magnitudes, imSize);
     }
 
