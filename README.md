@@ -9,4 +9,6 @@
 ![Nieghbour Comparison](./example/after-neighbourcompare-image.bmp)
 ## After Thresholding
 ![Thresholding](./example/after-thresholding-image.bmp)
+## Final Image
+![Final Image](./example/final-output-real.bmp)
 
