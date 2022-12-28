@@ -39,7 +39,7 @@ int main(){
     CImg <float>  output1(rawData, imWidth, imHeight);
     output1.save("../../images/output/original-image.bmp");
 
-    for (int i = 0; i < 100; i++){
+    for (int i = 0; i < 1; i++){
 
 
     // Define a 5X5 gaussian kerenl

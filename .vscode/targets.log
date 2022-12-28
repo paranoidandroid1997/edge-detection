@@ -1,0 +1,344 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 3.82
+# Built for x86_64-redhat-linux-gnu
+# Copyright (C) 2010  Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Wed Dec 28 14:26:45 2022
+
+# Variables
+
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# default
+.SHELLFLAGS := -c
+# environment
+VSCODE_AGENT_FOLDER = /home/hwaterho/.vscode-server
+# environment
+MODULEPATH = /cm/local/modulefiles:/cm/shared/modulefiles
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# automatic
+@F = $(notdir $@)
+# default
+MAKE_VERSION := 3.82
+# makefile
+CURDIR := /home/hwaterho/gpu-programming/edge-detection
+# makefile
+SHELL = /bin/sh
+# environment
+define BASH_FUNC_switchml()
+() {  typeset swfound=1;
+ if [ "${MODULES_USE_COMPAT_VERSION:-0}" = '1' ]; then
+ typeset swname='main';
+ if [ -e /cm/local/apps/environment-modules/4.5.3//libexec/modulecmd.tcl ]; then
+ typeset swfound=0;
+ unset MODULES_USE_COMPAT_VERSION;
+ fi;
+ else
+ typeset swname='compatibility';
+ if [ -e /cm/local/apps/environment-modules/4.5.3//libexec/modulecmd-compat ]; then
+ typeset swfound=0;
+ MODULES_USE_COMPAT_VERSION=1;
+ export MODULES_USE_COMPAT_VERSION;
+ fi;
+ fi;
+ if [ $swfound -eq 0 ]; then
+ echo "Switching to Modules $swname version";
+ source /cm/local/apps/environment-modules/4.5.3//init/bash;
+ else
+ echo "Cannot switch to Modules $swname version, command not found";
+ return 1;
+ fi
+}
+endef
+# environment
+ENABLE_LMOD = 0
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en","availableLanguages":{}}
+# environment
+_ = /usr/bin/make
+# makefile
+MAKEFILE_LIST := 
+# environment
+HISTCONTROL = ignoredups
+# environment
+LOADEDMODULES_modshare = slurm/slurm/20.11.8:1
+# environment
+define BASH_FUNC_ml()
+() {  module ml "$@"
+}
+endef
+# environment
+XDG_DATA_DIRS = /home/hwaterho/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
+# environment
+LESSOPEN = ||/usr/bin/lesspipe.sh %s
+# environment
+VSCODE_CWD = /home/hwaterho
+# environment
+_LMFILES__modshare = /cm/local/modulefiles/slurm/slurm/20.11.8:1
+# environment
+KRB5CCNAME = KEYRING:persistent:273096
+# environment
+SSH_CONNECTION = 128.114.224.196 57231 128.114.183.227 22
+# environment
+PATH = /home/hwaterho/.vscode-server/bin/e8a3071ea4344d9d48ef8a4df2c097372b0c5161/bin/remote-cli:/cm/shared/apps/slurm/current/sbin:/cm/shared/apps/slurm/current/bin:/cm/local/apps/environment-modules/4.5.3//bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/sbin:/cm/local/apps/environment-modules/4.5.3/bin:/opt/dell/srvadmin/bin:/home/hwaterho/.local/bin:/home/hwaterho/bin:/home/hwaterho/.local/bin:/home/hwaterho/bin
+# environment
+XDG_RUNTIME_DIR = /run/user/273096
+# environment
+MODULES_CMD = /cm/local/apps/environment-modules/4.5.3/libexec/modulecmd.tcl
+# environment
+LIBRARY_PATH = /cm/shared/apps/slurm/current/lib64/slurm:/cm/shared/apps/slurm/current/lib64
+# environment
+CPATH = /cm/shared/apps/slurm/current/include
+# environment
+BASH_ENV = /cm/local/apps/environment-modules/4.5.3//init/bash
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver check-symlink
+# automatic
+%F = $(notdir $%)
+# environment
+SLURM_CONF = /cm/shared/apps/slurm/var/etc/slurm/slurm.conf
+# environment
+PWD = /home/hwaterho/gpu-programming/edge-detection
+# environment
+VSCODE_IPC_HOOK_CLI = /run/user/273096/vscode-ipc-47dcb08a-29cb-4631-9da5-e872e7a3fed8.sock
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+MANPATH = /cm/shared/apps/slurm/current/man:/cm/local/apps/environment-modules/4.5.3//share/man:/usr/local/share/man:/usr/share/man/overrides:/usr/share/man:/cm/local/apps/environment-modules/current/share/man:/cm/local/apps/environment-modules/current/share/man
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /home/hwaterho
+# environment
+LD_LIBRARY_PATH = /cm/shared/apps/slurm/current/lib64/slurm:/cm/shared/apps/slurm/current/lib64
+# environment
+MODULESHOME = /cm/local/apps/environment-modules/4.5.3/
+# environment
+LOGNAME = hwaterho
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# automatic
++F = $(notdir $+)
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+HOSTNAME = lux-0
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# environment
+SHLVL = 5
+# environment
+XDG_SESSION_ID = 272119
+# environment
+USER = hwaterho
+# makefile
+.DEFAULT_GOAL := 
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# environment
+define BASH_FUNC_module()
+() {  unset _mlshdbg;
+ if [ "${MODULES_SILENT_SHELL_DEBUG:-0}" = '1' ]; then
+ case "$-" in 
+ *v*x*)
+ set +vx;
+ _mlshdbg='vx'
+ ;;
+ *v*)
+ set +v;
+ _mlshdbg='v'
+ ;;
+ *x*)
+ set +x;
+ _mlshdbg='x'
+ ;;
+ *)
+ _mlshdbg=''
+ ;;
+ esac;
+ fi;
+ unset _mlre _mlIFS;
+ if [ -n "${IFS+x}" ]; then
+ _mlIFS=$IFS;
+ fi;
+ IFS=' ';
+ for _mlv in ${MODULES_RUN_QUARANTINE:-};
+ do
+ if [ "${_mlv}" = "${_mlv##*[!A-Za-z0-9_]}" -a "${_mlv}" = "${_mlv#[0-9]}" ]; then
+ if [ -n "`eval 'echo ${'$_mlv'+x}'`" ]; then
+ _mlre="${_mlre:-}${_mlv}_modquar='`eval 'echo ${'$_mlv'}'`' ";
+ fi;
+ _mlrv="MODULES_RUNENV_${_mlv}";
+ _mlre="${_mlre:-}${_mlv}='`eval 'echo ${'$_mlrv':-}'`' ";
+ fi;
+ done;
+ if [ -n "${_mlre:-}" ]; then
+ eval `eval ${_mlre} /usr/bin/tclsh /cm/local/apps/environment-modules/4.5.3/libexec/modulecmd.tcl bash '"$@"'`;
+ else
+ eval `/usr/bin/tclsh /cm/local/apps/environment-modules/4.5.3/libexec/modulecmd.tcl bash "$@"`;
+ fi;
+ _mlstatus=$?;
+ if [ -n "${_mlIFS+x}" ]; then
+ IFS=$_mlIFS;
+ else
+ unset IFS;
+ fi;
+ unset _mlre _mlv _mlrv _mlIFS;
+ if [ -n "${_mlshdbg:-}" ]; then
+ set -$_mlshdbg;
+ fi;
+ unset _mlshdbg;
+ return $_mlstatus
+}
+endef
+# default
+MAKE_COMMAND := make
+# environment
+CMD_WLM_CLUSTER_NAME = slurm
+# environment
+PATH_modshare = /cm/shared/apps/slurm/current/bin:1:/cm/local/apps/environment-modules/4.5.3//bin:1:/usr/sbin:1:/usr/bin:1:/cm/local/apps/environment-modules/4.5.3/bin:1:/opt/dell/srvadmin/bin:1:/usr/local/sbin:1:/cm/shared/apps/slurm/current/sbin:1:/usr/local/bin:1:/sbin:1
+# default
+.VARIABLES := 
+# automatic
+*F = $(notdir $*)
+# makefile
+MAKEFLAGS = Rrqp
+# environment
+MFLAGS = -Rrqp
+# environment
+SSH_CLIENT = 128.114.224.196 57231 22
+# environment
+MAIL = /var/spool/mail/hwaterho
+# environment
+LOADEDMODULES = slurm/slurm/20.11.8
+# environment
+LIBRARY_PATH_modshare = /cm/shared/apps/slurm/current/lib64:1:/cm/shared/apps/slurm/current/lib64/slurm:1
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+CPATH_modshare = /cm/shared/apps/slurm/current/include:1
+# environment
+BROWSER = /home/hwaterho/.vscode-server/bin/e8a3071ea4344d9d48ef8a4df2c097372b0c5161/bin/helpers/browser.sh
+# environment
+VSCODE_HANDLES_SIGPIPE = true
+# default
+MAKEFILES := 
+# automatic
+<F = $(notdir $<)
+# environment
+_LMFILES_ = /cm/local/modulefiles/slurm/slurm/20.11.8
+# environment
+LC_ALL = C
+# automatic
+^F = $(notdir $^)
+# default
+SUFFIXES := 
+# environment
+HISTSIZE = 1000
+# environment
+MANPATH_modshare = /usr/local/share/man:1:/usr/share/man/overrides:1:/cm/local/apps/environment-modules/4.5.3//share/man:1:/cm/local/apps/environment-modules/current/share/man:1:/usr/share/man:1:/cm/shared/apps/slurm/current/man:1
+# environment
+LD_LIBRARY_PATH_modshare = /cm/shared/apps/slurm/current/lib64:1:/cm/shared/apps/slurm/current/lib64/slurm:1
+# default
+.INCLUDE_DIRS = /usr/include /usr/local/include /usr/include
+# default
+.RECIPEPREFIX := 
+# environment
+ENV = /cm/local/apps/environment-modules/4.5.3//init/profile.sh
+# environment
+LANG = C
+# variable set hash-table stats:
+# Load=86/1024=8%, Rehash=0, Collisions=6/105=6%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 1991046868, inode 144120372587997854): 9 files, no impossibilities.
+
+# 9 files, no impossibilities in 1 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+# Not a target:
+all:
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# Not a target:
+makefile:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+GNUmakefile:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# files hash-table stats:
+# Load=6/1024=1%, Rehash=0, Collisions=0/15=0%
+# VPATH Search Paths
+
+# No `vpath' search paths.
+
+# No general (`VPATH' variable) search path.
+
+# # of strings in strcache: 0 / lookups = 20 / hits = 20
+# # of strcache buffers: 1 (* 8176 B/buffer = 8176 B)
+# strcache used: total = 0 (144) / max = 0 / min = 8176 / avg = 0
+# strcache free: total = 0 (8032) / max = 0 / min = 8176 / avg = 0
+
+# strcache hash-table stats:
+# Load=17/8192=0%, Rehash=0, Collisions=1/20=5%
+# Finished Make data base on Wed Dec 28 14:26:45 2022
+
+ 
+make: *** No rule to make target `all'.  Stop.
+

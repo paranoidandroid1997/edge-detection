@@ -1,0 +1,6 @@
+*.o
+*.ex
+*.out
+*.err
+launch-script.sh
+images
